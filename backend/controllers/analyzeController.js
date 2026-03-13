@@ -7,7 +7,7 @@ export const analyzeResume = async (req, res) => {
     const { resumeText, jobDescription } = req.body;
 
     const prompt = `
-Analyze the resume against the job description.
+Analyze the following resume against the job description.
 
 Resume:
 ${resumeText}
@@ -15,12 +15,12 @@ ${resumeText}
 Job Description:
 ${jobDescription}
 
-Return JSON with:
+Return result in JSON with:
 score, matchedSkills, missingSkills, suggestions
 `;
 
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         contents: [
           {
@@ -31,13 +31,13 @@ score, matchedSkills, missingSkills, suggestions
     );
 
     const result =
-      response.data.candidates[0].content.parts[0].text;
+      response.data.candidates?.[0]?.content?.parts?.[0]?.text;
 
     res.json({ result });
 
   } catch (error) {
 
-    console.error(error.response?.data || error.message);
+    console.error("Gemini error:", error.response?.data || error.message);
 
     res.status(500).json({
       error: "AI analysis failed"
