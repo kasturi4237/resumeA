@@ -61,7 +61,7 @@ const CircleScore = ({ score, size = 120, label }) => {
           style={{ transition: "stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1)" }}
         />
       </svg>
-      <div style={{ marginTop: -size / 2 - 14, position: "relative", zIndex: 1, textAlign: "center", pointerEvents: "none" }}>
+      <div style={{   marginTop: -size / 2 - 14, position: "relative", zIndex: 1, textAlign: "center", pointerEvents: "none" }}>
         <div style={{ fontSize: size === 120 ? 28 : 18, fontWeight: 800, color, fontFamily: "'Space Mono', monospace" }}>{score}</div>
       </div>
       <div style={{ marginTop: size === 120 ? -10 : -8, fontSize: 11, color: "#8892a4", textTransform: "uppercase", letterSpacing: 1.5, fontFamily: "'Space Mono', monospace" }}>{label}</div>
